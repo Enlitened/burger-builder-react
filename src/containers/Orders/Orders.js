@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 
-import axios from '../../axios-orders';
 import Order from '../../components/Order/Order';
+import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 class Orders extends Component {
-
     state = {
         orders: [],
-        loading: false
+        loading: true
     }
 
     componentDidMount() {
@@ -23,12 +22,12 @@ class Orders extends Component {
                 }
                 this.setState({loading: false, orders: fetchedOrders});
             })
-            .catch(error => {
+            .catch(err => {
                 this.setState({loading: false});
             });
     }
 
-    render(){
+    render () {
         return (
             <div>
                 {this.state.orders.map(order => (
@@ -37,7 +36,7 @@ class Orders extends Component {
                         ingredients={order.ingredients}
                         price={order.price} />
                 ))}
-            </div>            
+            </div>
         );
     }
 }
